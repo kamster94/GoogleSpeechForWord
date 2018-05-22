@@ -15,6 +15,9 @@ namespace GoogleSpeechForWord
 
         private void HandlerAddIn_Startup(object sender, System.EventArgs e)
         {
+            System.Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", "../../google-speech-pwr.json");
+            interfaceForm = new InterfaceForm(this);
+            interfaceForm.Show();
         }
 
         private void HandlerAddIn_Shutdown(object sender, System.EventArgs e)
