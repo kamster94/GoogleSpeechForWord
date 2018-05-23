@@ -46,6 +46,7 @@ namespace GoogleSpeechForWord
             timer.Tick += timer_Tick;
             timer.Start();
             buttonRecording.Enabled = false;
+            iconBox.Image = Properties.Resources.baseline_keyboard_voice_black_18dp_on;
             recognitionEng.StartListening(10);
 
         }
@@ -53,6 +54,7 @@ namespace GoogleSpeechForWord
         void timer_Tick(object sender, System.EventArgs e)
         {
             buttonRecording.Enabled = true;
+            iconBox.Image = Properties.Resources.baseline_keyboard_voice_black_18dp;
             timer.Stop();
         }
     }

@@ -23,6 +23,7 @@ namespace GoogleSpeechForWord
         {
             System.Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", "../../google-speech-pwr.json");
             interfaceForm = new InterfaceForm(this);
+            interfaceForm.MinimizeBox = false;
             interfaceForm.Show();
         }
 
