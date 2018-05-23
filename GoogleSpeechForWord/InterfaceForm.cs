@@ -14,6 +14,7 @@ namespace GoogleSpeechForWord
     {
         private HandlerAddIn handler;
         SpeechRecognition recognitionEng;
+        System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
 
         protected override CreateParams CreateParams
         {
@@ -41,7 +42,18 @@ namespace GoogleSpeechForWord
 
         private void ButtonRecording_ClickAsync(object sender, EventArgs e)
         {
+            timer.Interval = 10000; // here time in milliseconds
+            timer.Tick += timer_Tick;
+            timer.Start();
+            buttonRecording.Enabled = false;
             recognitionEng.StartListening(10);
+
+        }
+
+        void timer_Tick(object sender, System.EventArgs e)
+        {
+            buttonRecording.Enabled = true;
+            timer.Stop();
         }
     }
 }

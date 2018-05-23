@@ -55,6 +55,7 @@ namespace GoogleSpeechForWord
             // Print responses as they arrive.
             Task printResponses = Task.Run(async () =>
             {
+                int mode = -1;
                 while (await streamingCall.ResponseStream.MoveNext(
                     default(CancellationToken)))
                 {
@@ -65,10 +66,29 @@ namespace GoogleSpeechForWord
                         {
                             if(result.IsFinal)
                             {
-                                log.Debug(alternative.Transcript);
-                                /*Microsoft.Office.Interop.Word.Range rng = handler.Application.ActiveDocument.Range(0, 0);
-                                rng.Text = alternative.Transcript;*/
-                                handler.InsertText(alternative.Transcript);
+                                if (mode == -1)
+                                {
+                                    var firstWord = alternative.Transcript.IndexOf(" ") > -1
+                                          ? alternative.Transcript.Substring(0, alternative.Transcript.IndexOf(" "))
+                                          : alternative.Transcript;
+                                    if (firstWord.ToLower() == "text") mode = 1;
+                                    else if (firstWord.ToLower() == "sign") mode = 2;
+                                    else if (firstWord.ToLower() == "command") mode = 3;
+                                }
+                                else
+                                {
+                                    if (mode == 1)
+                                    {
+                                        log.Debug("Working in mode 1");
+                                        handler.InsertText(alternative.Transcript);
+                                    }
+                                    else if (mode == 2)
+                                    {
+                                        log.Debug("Working in mode 2");
+                                        handler.InsertSign(alternative.Transcript);
+                                    }
+                                }
+                                
                             }
                             
                         }

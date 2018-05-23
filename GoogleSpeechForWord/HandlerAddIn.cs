@@ -7,12 +7,17 @@ using Word = Microsoft.Office.Interop.Word;
 using Office = Microsoft.Office.Core;
 using Microsoft.Office.Tools.Word;
 using log4net.Config;
+using log4net;
+using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace GoogleSpeechForWord
 {
     public partial class HandlerAddIn
     {
         private InterfaceForm interfaceForm;
+
+        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         private void HandlerAddIn_Startup(object sender, System.EventArgs e)
         {
@@ -27,8 +32,6 @@ namespace GoogleSpeechForWord
 
         public void InsertText(string text)
         {
-            /*Word.Range range = this.Application.ActiveDocument.Range(0, 0);
-            range.Text = text;*/
             Word.Selection currentSelection = Application.Selection;
 
             // Store the user's current Overtype selection
@@ -65,6 +68,24 @@ namespace GoogleSpeechForWord
 
             // Restore the user's Overtype selection
             Application.Options.Overtype = userOvertype;
+        }
+
+        public void InsertSign(string text)
+        {
+            log.Debug("Writing sign " + text);
+            foreach (string word in text.Split(' '))
+            {
+                if (word.ToLower() == "slash" | word.ToLower() == "\\") InsertText("\\");
+                if (word.ToLower() == "comma" | word.ToLower() == "coma" | word.ToLower() == ",") InsertText(",");
+                if (word.ToLower() == "dot" | word.ToLower() == ".") InsertText(".");
+                if (word.ToLower() == "bracket") InsertText("()");
+            }
+            
+        }
+
+        public void IssueCommand(string command)
+        {
+
         }
 
         #region Kod wygenerowany przez program VSTO
