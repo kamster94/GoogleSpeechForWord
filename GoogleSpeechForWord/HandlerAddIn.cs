@@ -6,6 +6,7 @@ using System.Xml.Linq;
 using Word = Microsoft.Office.Interop.Word;
 using Office = Microsoft.Office.Core;
 using Microsoft.Office.Tools.Word;
+using log4net.Config;
 
 namespace GoogleSpeechForWord
 {
@@ -22,6 +23,12 @@ namespace GoogleSpeechForWord
 
         private void HandlerAddIn_Shutdown(object sender, System.EventArgs e)
         {
+        }
+
+        public void InsertText(string text)
+        {
+            Word.Range range = this.Application.ActiveDocument.Range(Application.ActiveDocument.Content.End, Application.ActiveDocument.Content.End);
+            range.Text = text;
         }
 
         #region Kod wygenerowany przez program VSTO

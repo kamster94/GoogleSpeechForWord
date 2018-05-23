@@ -13,7 +13,7 @@ namespace GoogleSpeechForWord
     public partial class InterfaceForm : Form
     {
         private HandlerAddIn handler;
-        SpeechRecognition recog;
+        SpeechRecognition recognitionEng;
 
         protected override CreateParams CreateParams
         {
@@ -30,8 +30,18 @@ namespace GoogleSpeechForWord
         {
             InitializeComponent();
             this.handler = handler;
-            recog = new SpeechRecognition();
+            recognitionEng = new SpeechRecognition(handler);
 
+        }
+
+        private void ButtonCreateDoc_Click(object sender, EventArgs e)
+        {
+            handler.Application.Documents.Add();
+        }
+
+        private void ButtonRecording_ClickAsync(object sender, EventArgs e)
+        {
+            recognitionEng.StartListening(10);
         }
     }
 }
