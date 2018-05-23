@@ -86,7 +86,35 @@ namespace GoogleSpeechForWord
 
         public void IssueCommand(string command)
         {
+            log.Debug(command);
+            if (command.StartsWith(" back"))
+            {
+                log.Debug("Undoing changes");
+                int number = SillyNumberParser(command.Substring(6));
+                if (number == 0) Int32.TryParse(command.Substring(6, 1), out number);
+                log.Debug(number + " times");
+                this.Application.ActiveDocument.Undo(number);
+            }
+        }
 
+        private int SillyNumberParser(string textNumber)
+        {
+            switch(textNumber)
+            {
+                case "one":
+                    return 1;
+                case "two":
+                case "to":
+                    return 2;
+                case "three":
+                    return 3;
+                case "four":
+                    return 4;
+                case "five":
+                    return 5;
+                default:
+                    return 0;
+            }
         }
 
         #region Kod wygenerowany przez program VSTO

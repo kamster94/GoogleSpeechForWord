@@ -77,15 +77,18 @@ namespace GoogleSpeechForWord
                                 }
                                 else
                                 {
-                                    if (mode == 1)
+                                    log.Debug("Working in mode " + mode);
+                                    switch (mode)
                                     {
-                                        log.Debug("Working in mode 1");
-                                        handler.InsertText(alternative.Transcript);
-                                    }
-                                    else if (mode == 2)
-                                    {
-                                        log.Debug("Working in mode 2");
-                                        handler.InsertSign(alternative.Transcript);
+                                        case 1:
+                                            handler.InsertText(alternative.Transcript);
+                                            break;
+                                        case 2:
+                                            handler.InsertSign(alternative.Transcript);
+                                            break;
+                                        case 3:
+                                            handler.IssueCommand(alternative.Transcript);
+                                            break;
                                     }
                                 }
                                 
