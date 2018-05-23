@@ -139,10 +139,10 @@
     <value>cztery</value>
   </data>
   <data name="moveLeft" xml:space="preserve">
-    <value>kursor lewo</value>
+    <value> kursor lewo</value>
   </data>
   <data name="moveUp" xml:space="preserve">
-    <value>kursor wyżej</value>
+    <value> kursor wyżej</value>
   </data>
   <data name="one" xml:space="preserve">
     <value>raz</value>

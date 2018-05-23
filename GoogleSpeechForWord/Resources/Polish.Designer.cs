@@ -124,7 +124,7 @@ namespace GoogleSpeechForWord.Resources {
         }
         
         /// <summary>
-        /// Wyszukuje zlokalizowany ciąg podobny do ciągu kursor lewo.
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu  kursor lewo.
         /// </summary>
         internal static string moveLeft {
             get {
@@ -133,7 +133,7 @@ namespace GoogleSpeechForWord.Resources {
         }
         
         /// <summary>
-        /// Wyszukuje zlokalizowany ciąg podobny do ciągu kursor wyżej.
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu  kursor wyżej.
         /// </summary>
         internal static string moveUp {
             get {

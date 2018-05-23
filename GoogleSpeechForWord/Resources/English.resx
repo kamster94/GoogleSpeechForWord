@@ -127,7 +127,7 @@
     <value>coma</value>
   </data>
   <data name="command" xml:space="preserve">
-    <value>komenda</value>
+    <value>command</value>
   </data>
   <data name="dot" xml:space="preserve">
     <value>dot</value>
@@ -148,13 +148,13 @@
     <value>one</value>
   </data>
   <data name="sign" xml:space="preserve">
-    <value>znak</value>
+    <value>sign</value>
   </data>
   <data name="slash" xml:space="preserve">
     <value>slash</value>
   </data>
   <data name="text" xml:space="preserve">
-    <value>tekst</value>
+    <value>text</value>
   </data>
   <data name="three" xml:space="preserve">
     <value>three</value>

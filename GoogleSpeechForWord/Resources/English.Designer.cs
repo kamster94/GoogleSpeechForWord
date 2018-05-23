@@ -88,7 +88,7 @@ namespace GoogleSpeechForWord.Resources {
         }
         
         /// <summary>
-        /// Wyszukuje zlokalizowany ciąg podobny do ciągu komenda.
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu command.
         /// </summary>
         internal static string command {
             get {
@@ -151,7 +151,7 @@ namespace GoogleSpeechForWord.Resources {
         }
         
         /// <summary>
-        /// Wyszukuje zlokalizowany ciąg podobny do ciągu znak.
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu sign.
         /// </summary>
         internal static string sign {
             get {
@@ -169,7 +169,7 @@ namespace GoogleSpeechForWord.Resources {
         }
         
         /// <summary>
-        /// Wyszukuje zlokalizowany ciąg podobny do ciągu tekst.
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu text.
         /// </summary>
         internal static string text {
             get {
