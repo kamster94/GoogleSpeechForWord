@@ -257,6 +257,16 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Resources\English.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>English.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Polish.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Polish.resx</DependentUpon>
+    </Compile>
     <Compile Include="SpeechRecognition.cs" />
     <EmbeddedResource Include="InterfaceForm.resx">
       <DependentUpon>InterfaceForm.cs</DependentUpon>
@@ -271,6 +281,14 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Resources\English.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>English.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Polish.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Polish.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="google-speech-pwr.json" />
     <None Include="GoogleSpeechForWord_TemporaryKey.pfx" />

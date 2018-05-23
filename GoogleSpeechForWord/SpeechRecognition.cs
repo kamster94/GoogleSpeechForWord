@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Resources;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,9 +18,12 @@ namespace GoogleSpeechForWord
 
         private HandlerAddIn handler;
 
-        public SpeechRecognition(HandlerAddIn handler)
+        ResourceManager resourceManager;
+
+        public SpeechRecognition(HandlerAddIn handler, ResourceManager resourceManager)
         {
             this.handler = handler;
+            this.resourceManager = resourceManager;
         }
 
         public void StartListening(int seconds)
@@ -47,7 +52,7 @@ namespace GoogleSpeechForWord
                             Encoding =
                             RecognitionConfig.Types.AudioEncoding.Linear16,
                             SampleRateHertz = 16000,
-                            LanguageCode = "en",
+                            LanguageCode = "pl",
                         },
                         InterimResults = true,
                     }
@@ -71,9 +76,9 @@ namespace GoogleSpeechForWord
                                     var firstWord = alternative.Transcript.IndexOf(" ") > -1
                                           ? alternative.Transcript.Substring(0, alternative.Transcript.IndexOf(" "))
                                           : alternative.Transcript;
-                                    if (firstWord.ToLower() == "text") mode = 1;
-                                    else if (firstWord.ToLower() == "sign") mode = 2;
-                                    else if (firstWord.ToLower() == "command") mode = 3;
+                                    if (firstWord.ToLower() == resourceManager.GetString("text")) mode = 1;
+                                    else if (firstWord.ToLower() == resourceManager.GetString("sign")) mode = 2;
+                                    else if (firstWord.ToLower() == resourceManager.GetString("command")) mode = 3;
                                 }
                                 else
                                 {

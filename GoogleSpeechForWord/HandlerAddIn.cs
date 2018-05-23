@@ -11,6 +11,7 @@ using log4net;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Word;
+using System.Resources;
 
 namespace GoogleSpeechForWord
 {
@@ -20,10 +21,13 @@ namespace GoogleSpeechForWord
 
         private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
+        ResourceManager resourceManager;
+
         private void HandlerAddIn_Startup(object sender, System.EventArgs e)
         {
             System.Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", "../../google-speech-pwr.json");
-            interfaceForm = new InterfaceForm(this);
+            resourceManager = new ResourceManager("GoogleSpeechForWord.Resources.Polish", Assembly.GetExecutingAssembly());
+            interfaceForm = new InterfaceForm(this, resourceManager);
             interfaceForm.MinimizeBox = false;
             interfaceForm.Show();
         }
@@ -77,10 +81,10 @@ namespace GoogleSpeechForWord
             log.Debug("Writing sign " + text);
             foreach (string word in text.Split(' '))
             {
-                if (word.ToLower() == "slash" | word.ToLower() == "\\") InsertText("\\");
-                if (word.ToLower() == "comma" | word.ToLower() == "coma" | word.ToLower() == ",") InsertText(",");
-                if (word.ToLower() == "dot" | word.ToLower() == ".") InsertText(".");
-                if (word.ToLower() == "bracket") InsertText("()");
+                if (word.ToLower() == resourceManager.GetString("slash") | word.ToLower() == "\\") InsertText("\\");
+                if (word.ToLower() == resourceManager.GetString("comma") | word.ToLower() == resourceManager.GetString("commaAlt") | word.ToLower() == ",") InsertText(",");
+                if (word.ToLower() == resourceManager.GetString("dot") | word.ToLower() == ".") InsertText(".");
+                if (word.ToLower() == resourceManager.GetString("bracket")) InsertText("()");
             }
             
         }
@@ -88,15 +92,15 @@ namespace GoogleSpeechForWord
         public void IssueCommand(string command)
         {
             log.Debug(command);
-            if (command.StartsWith(" back"))
+            if (command.ToLower().StartsWith(resourceManager.GetString("undo")))
             {
                 log.Debug("Undoing changes");
-                int number = SillyNumberParser(command.Substring(6));
-                if (number == 0) Int32.TryParse(command.Substring(6, 1), out number);
+                int number = SillyNumberParser(command.Split(' ')[2]);
+                if (number == 0) Int32.TryParse(command.Split(' ')[2], out number);
                 log.Debug(number + " times");
                 this.Application.ActiveDocument.Undo(number);
             }
-            else if (command.StartsWith(" move up"))
+            else if (command.ToLower().StartsWith(resourceManager.GetString("moveUp")))
             {
                 Word.Selection currentSelection = Application.Selection;
                 log.Debug("Moving up");
@@ -105,7 +109,7 @@ namespace GoogleSpeechForWord
                 log.Debug(number + " times");
                 currentSelection.MoveUp(WdUnits.wdLine, number);
             }
-            else if (command.StartsWith(" move left"))
+            else if (command.ToLower().StartsWith(resourceManager.GetString("moveLeft")))
             {
                 Word.Selection currentSelection = Application.Selection;
                 log.Debug("Moving left");
@@ -119,22 +123,12 @@ namespace GoogleSpeechForWord
 
         private int SillyNumberParser(string textNumber)
         {
-            switch(textNumber)
-            {
-                case "one":
-                    return 1;
-                case "two":
-                case "to":
-                    return 2;
-                case "three":
-                    return 3;
-                case "four":
-                    return 4;
-                case "five":
-                    return 5;
-                default:
-                    return 0;
-            }
+            if (textNumber == resourceManager.GetString("one")) return 1;
+            else if (textNumber == resourceManager.GetString("two") | textNumber == resourceManager.GetString("twoAlt")) return 2;
+            else if (textNumber == resourceManager.GetString("three")) return 3;
+            else if (textNumber == resourceManager.GetString("four")) return 4;
+            else if (textNumber == resourceManager.GetString("five")) return 5;
+            else return 0;
         }
 
         #region Kod wygenerowany przez program VSTO

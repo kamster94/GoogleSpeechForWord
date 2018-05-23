@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -27,12 +28,11 @@ namespace GoogleSpeechForWord
             }
         }
 
-        public InterfaceForm(HandlerAddIn handler)
+        public InterfaceForm(HandlerAddIn handler, ResourceManager resourceManager)
         {
             InitializeComponent();
             this.handler = handler;
-            recognitionEng = new SpeechRecognition(handler);
-
+            recognitionEng = new SpeechRecognition(handler, resourceManager);
         }
 
         private void ButtonCreateDoc_Click(object sender, EventArgs e)
