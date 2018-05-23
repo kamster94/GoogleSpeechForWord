@@ -27,8 +27,44 @@ namespace GoogleSpeechForWord
 
         public void InsertText(string text)
         {
-            Word.Range range = this.Application.ActiveDocument.Range(Application.ActiveDocument.Content.End, Application.ActiveDocument.Content.End);
-            range.Text = text;
+            /*Word.Range range = this.Application.ActiveDocument.Range(0, 0);
+            range.Text = text;*/
+            Word.Selection currentSelection = Application.Selection;
+
+            // Store the user's current Overtype selection
+            bool userOvertype = Application.Options.Overtype;
+
+            // Make sure Overtype is turned off.
+            if (Application.Options.Overtype)
+            {
+                Application.Options.Overtype = false;
+            }
+
+            // Test to see if selection is an insertion point.
+            if (currentSelection.Type == Word.WdSelectionType.wdSelectionIP)
+            {
+                currentSelection.TypeText(text);
+                currentSelection.TypeText(" ");
+            }
+            else
+                if (currentSelection.Type == Word.WdSelectionType.wdSelectionNormal)
+            {
+                // Move to start of selection.
+                if (Application.Options.ReplaceSelection)
+                {
+                    object direction = Word.WdCollapseDirection.wdCollapseStart;
+                    currentSelection.Collapse(ref direction);
+                }
+                currentSelection.TypeText(text);
+                currentSelection.TypeText(" ");
+            }
+            else
+            {
+                // Do nothing.
+            }
+
+            // Restore the user's Overtype selection
+            Application.Options.Overtype = userOvertype;
         }
 
         #region Kod wygenerowany przez program VSTO
