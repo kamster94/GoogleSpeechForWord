@@ -10,6 +10,7 @@ using log4net.Config;
 using log4net;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using Microsoft.Office.Interop.Word;
 
 namespace GoogleSpeechForWord
 {
@@ -94,6 +95,25 @@ namespace GoogleSpeechForWord
                 if (number == 0) Int32.TryParse(command.Substring(6, 1), out number);
                 log.Debug(number + " times");
                 this.Application.ActiveDocument.Undo(number);
+            }
+            else if (command.StartsWith(" move up"))
+            {
+                Word.Selection currentSelection = Application.Selection;
+                log.Debug("Moving up");
+                int number = SillyNumberParser(command.Split(' ')[3]);
+                if (number == 0) Int32.TryParse(command.Split(' ')[3], out number);
+                log.Debug(number + " times");
+                currentSelection.MoveUp(WdUnits.wdLine, number);
+            }
+            else if (command.StartsWith(" move left"))
+            {
+                Word.Selection currentSelection = Application.Selection;
+                log.Debug("Moving left");
+                int number = SillyNumberParser(command.Split(' ')[3]);
+                log.Debug(command.Split(' ')[3]);
+                if (number == 0) Int32.TryParse(command.Split(' ')[3], out number);
+                log.Debug(number + " times");
+                currentSelection.MoveLeft(WdUnits.wdCharacter, number);
             }
         }
 
