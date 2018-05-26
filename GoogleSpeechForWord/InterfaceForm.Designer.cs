@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.buttonRecording = new System.Windows.Forms.Button();
-            this.buttonCreateDoc = new System.Windows.Forms.Button();
+            this.buttonInfo = new System.Windows.Forms.Button();
             this.iconBox = new System.Windows.Forms.PictureBox();
             this.label = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.iconBox)).BeginInit();
@@ -47,15 +47,15 @@
             this.buttonRecording.UseVisualStyleBackColor = true;
             this.buttonRecording.Click += new System.EventHandler(this.ButtonRecording_ClickAsync);
             // 
-            // buttonCreateDoc
+            // buttonInfo
             // 
-            this.buttonCreateDoc.Location = new System.Drawing.Point(12, 126);
-            this.buttonCreateDoc.Name = "buttonCreateDoc";
-            this.buttonCreateDoc.Size = new System.Drawing.Size(155, 23);
-            this.buttonCreateDoc.TabIndex = 1;
-            this.buttonCreateDoc.Text = "Create new document";
-            this.buttonCreateDoc.UseVisualStyleBackColor = true;
-            this.buttonCreateDoc.Click += new System.EventHandler(this.ButtonCreateDoc_Click);
+            this.buttonInfo.Location = new System.Drawing.Point(12, 126);
+            this.buttonInfo.Name = "buttonInfo";
+            this.buttonInfo.Size = new System.Drawing.Size(155, 23);
+            this.buttonInfo.TabIndex = 1;
+            this.buttonInfo.Text = "Info";
+            this.buttonInfo.UseVisualStyleBackColor = true;
+            this.buttonInfo.Click += new System.EventHandler(this.ButtonInfo_Click);
             // 
             // iconBox
             // 
@@ -83,7 +83,7 @@
             this.ClientSize = new System.Drawing.Size(179, 161);
             this.Controls.Add(this.label);
             this.Controls.Add(this.iconBox);
-            this.Controls.Add(this.buttonCreateDoc);
+            this.Controls.Add(this.buttonInfo);
             this.Controls.Add(this.buttonRecording);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -99,7 +99,7 @@
         #endregion
 
         private System.Windows.Forms.Button buttonRecording;
-        private System.Windows.Forms.Button buttonCreateDoc;
+        private System.Windows.Forms.Button buttonInfo;
         private System.Windows.Forms.PictureBox iconBox;
         private System.Windows.Forms.Label label;
     }

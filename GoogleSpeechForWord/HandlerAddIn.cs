@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Linq;
 using Word = Microsoft.Office.Interop.Word;
-using Office = Microsoft.Office.Core;
-using Microsoft.Office.Tools.Word;
-using log4net.Config;
 using log4net;
 using System.Reflection;
-using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Word;
 using System.Resources;
 
@@ -25,7 +17,10 @@ namespace GoogleSpeechForWord
 
         private void HandlerAddIn_Startup(object sender, System.EventArgs e)
         {
+            // Provide credentials to Google Cloud Platform, or set them up as global system variable
+            // File loaded in line below is not attached in this solution
             System.Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", "../../google-speech-pwr.json");
+            // Set up language to use
             resourceManager = new ResourceManager("GoogleSpeechForWord.Resources.Polish", Assembly.GetExecutingAssembly());
             interfaceForm = new InterfaceForm(this, resourceManager);
             interfaceForm.MinimizeBox = false;

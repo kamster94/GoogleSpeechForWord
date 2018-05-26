@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GoogleSpeechForWord
@@ -34,15 +27,15 @@ namespace GoogleSpeechForWord
             this.handler = handler;
             recognitionEng = new SpeechRecognition(handler, resourceManager);
         }
-
-        private void ButtonCreateDoc_Click(object sender, EventArgs e)
+        private void ButtonInfo_Click(object sender, EventArgs e)
         {
-            handler.Application.Documents.Add();
+            InfoForm info = new InfoForm();
+            info.ShowDialog();
         }
 
         private void ButtonRecording_ClickAsync(object sender, EventArgs e)
         {
-            timer.Interval = 10000; // here time in milliseconds
+            timer.Interval = 10000;
             timer.Tick += timer_Tick;
             timer.Start();
             buttonRecording.Enabled = false;
